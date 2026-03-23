@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="DompetKu - Aplikasi pengelola keuangan pribadi yang mudah dan modern.">
+    <title>DompetKu - Kelola Keuanganmu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/>
+                        <path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/>
+                        <path d="M18 12a2 2 0 0 0 0 4h4v-4h-4z"/>
+                    </svg>
+                </div>
+                <span class="logo-text">DompetKu</span>
+            </div>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="#" class="nav-item active" data-page="dashboard" id="nav-dashboard">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+                <span>Dashboard</span>
+            </a>
+            <a href="#" class="nav-item" data-page="transactions" id="nav-transactions">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                <span>Transaksi</span>
+            </a>
+            <a href="#" class="nav-item" data-page="categories" id="nav-categories">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"/></svg>
+                <span>Kategori</span>
+            </a>
+            <a href="#" class="nav-item" data-page="reports" id="nav-reports">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>
+                <span>Laporan</span>
+            </a>
+            <a href="#" class="nav-item" data-page="settings" id="nav-settings">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                <span>Pengaturan</span>
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <button class="btn-export" id="btn-export-data" title="Ekspor Data">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                <span>Ekspor CSV</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Mobile Header -->
+    <header class="mobile-header" id="mobile-header">
+        <button class="hamburger" id="hamburger">
+            <span></span><span></span><span></span>
+        </button>
+        <div class="logo">
+            <div class="logo-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/>
+                    <path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/>
+                    <path d="M18 12a2 2 0 0 0 0 4h4v-4h-4z"/>
+                </svg>
+            </div>
+            <span class="logo-text">DompetKu</span>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content" id="main-content">
+
+        <!-- ==================== DASHBOARD PAGE ==================== -->
+        <section class="page active" id="page-dashboard">
+            <div class="page-header">
+                <div>
+                    <h1 id="greeting">Selamat Malam! 🌙</h1>
+                    <p class="subtitle">Berikut ringkasan keuanganmu</p>
+                </div>
+                <div class="header-actions">
+                    <select class="month-filter" id="month-filter">
+                        <option value="all">Semua</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Summary Cards -->
+            <div class="summary-cards">
+                <div class="card card-balance">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+                    </div>
+                    <div class="card-info">
+                        <span class="card-label">Saldo</span>
+                        <span class="card-value" id="total-balance">Rp 0</span>
+                    </div>
+                </div>
+                <div class="card card-income">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                    </div>
+                    <div class="card-info">
+                        <span class="card-label">Pemasukan</span>
+                        <span class="card-value" id="total-income">Rp 0</span>
+                    </div>
+                </div>
+                <div class="card card-expense">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg>
+                    </div>
+                    <div class="card-info">
+                        <span class="card-label">Pengeluaran</span>
+                        <span class="card-value" id="total-expense">Rp 0</span>
+                    </div>
+                </div>
+                <div class="card card-transactions">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                    </div>
+                    <div class="card-info">
+                        <span class="card-label">Total Transaksi</span>
+                        <span class="card-value" id="total-count">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Row -->
+            <div class="charts-row">
+                <div class="chart-card">
+                    <h3>Arus Kas (7 Hari Terakhir)</h3>
+                    <canvas id="chart-cashflow"></canvas>
+                </div>
+                <div class="chart-card">
+                    <h3>Pengeluaran per Kategori</h3>
+                    <canvas id="chart-category"></canvas>
+                </div>
+            </div>
+
+            <!-- Recent Transactions -->
+            <div class="recent-transactions">
+                <div class="section-header">
+                    <h3>Transaksi Terakhir</h3>
+                    <a href="#" class="view-all" id="view-all-transactions">Lihat Semua →</a>
+                </div>
+                <div class="transaction-list" id="recent-transaction-list">
+                    <div class="empty-state">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="48" height="48"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                        <p>Belum ada transaksi</p>
+                        <span>Tambahkan transaksi pertamamu!</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== TRANSACTIONS PAGE ==================== -->
+        <section class="page" id="page-transactions">
+            <div class="page-header">
+                <div>
+                    <h1>Transaksi</h1>
+                    <p class="subtitle">Kelola semua transaksi keuanganmu</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn-primary" id="btn-add-transaction">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                        Tambah Transaksi
+                    </button>
+                </div>
+            </div>
+
+            <!-- Filters -->
+            <div class="filters">
+                <div class="search-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    <input type="text" placeholder="Cari transaksi..." id="search-transactions">
+                </div>
+                <select id="filter-type">
+                    <option value="all">Semua Tipe</option>
+                    <option value="income">Pemasukan</option>
+                    <option value="expense">Pengeluaran</option>
+                </select>
+                <select id="filter-category">
+                    <option value="all">Semua Kategori</option>
+                </select>
+            </div>
+
+            <!-- Transaction List -->
+            <div class="transaction-list full-list" id="full-transaction-list">
+                <div class="empty-state">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="48" height="48"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                    <p>Belum ada transaksi</p>
+                    <span>Klik tombol "Tambah Transaksi" untuk memulai</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== CATEGORIES PAGE ==================== -->
+        <section class="page" id="page-categories">
+            <div class="page-header">
+                <div>
+                    <h1>Kategori</h1>
+                    <p class="subtitle">Atur kategori pemasukan & pengeluaranmu</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn-primary" id="btn-add-category">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                        Tambah Kategori
+                    </button>
+                </div>
+            </div>
+
+            <div class="categories-grid" id="categories-grid">
+                <!-- filled by JS -->
+            </div>
+        </section>
+
+        <!-- ==================== REPORTS PAGE ==================== -->
+        <section class="page" id="page-reports">
+            <div class="page-header">
+                <div>
+                    <h1>Laporan</h1>
+                    <p class="subtitle">Analisis keuanganmu secara detail</p>
+                </div>
+                <div class="header-actions">
+                    <select id="report-period">
+                        <option value="7">7 Hari Terakhir</option>
+                        <option value="30" selected>30 Hari Terakhir</option>
+                        <option value="90">3 Bulan Terakhir</option>
+                        <option value="365">1 Tahun Terakhir</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="report-summary-cards">
+                <div class="report-card">
+                    <span class="report-card-label">Rata-rata Pemasukan/hari</span>
+                    <span class="report-card-value" id="avg-income">Rp 0</span>
+                </div>
+                <div class="report-card">
+                    <span class="report-card-label">Rata-rata Pengeluaran/hari</span>
+                    <span class="report-card-value" id="avg-expense">Rp 0</span>
+                </div>
+                <div class="report-card">
+                    <span class="report-card-label">Pengeluaran Tertinggi</span>
+                    <span class="report-card-value" id="highest-expense">Rp 0</span>
+                </div>
+                <div class="report-card">
+                    <span class="report-card-label">Kategori Terbanyak</span>
+                    <span class="report-card-value" id="top-category">-</span>
+                </div>
+            </div>
+
+            <div class="charts-row">
+                <div class="chart-card">
+                    <h3>Tren Pemasukan vs Pengeluaran</h3>
+                    <canvas id="chart-trend"></canvas>
+                </div>
+                <div class="chart-card">
+                    <h3>Distribusi Pengeluaran</h3>
+                    <canvas id="chart-distribution"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-card full-width">
+                <h3>Top 5 Kategori Pengeluaran</h3>
+                <canvas id="chart-top-categories"></canvas>
+            </div>
+        </section>
+
+        <!-- ==================== SETTINGS PAGE ==================== -->
+        <section class="page" id="page-settings">
+            <div class="page-header">
+                <div>
+                    <h1>Pengaturan</h1>
+                    <p class="subtitle">Sesuaikan preferensimu</p>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h3>Umum</h3>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <span class="setting-label">Mode Gelap</span>
+                        <span class="setting-desc">Aktifkan tampilan gelap</span>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="toggle-dark-mode">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <span class="setting-label">Mata Uang</span>
+                        <span class="setting-desc">Pilih mata uang yang digunakan</span>
+                    </div>
+                    <select id="currency-select">
+                        <option value="IDR" selected>IDR (Rp)</option>
+                        <option value="USD">USD ($)</option>
+                        <option value="EUR">EUR (€)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h3>Data</h3>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <span class="setting-label">Hapus Semua Data</span>
+                        <span class="setting-desc">Menghapus seluruh transaksi dan kategori</span>
+                    </div>
+                    <button class="btn-danger" id="btn-clear-data">Hapus Data</button>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <span class="setting-label">Impor Data</span>
+                        <span class="setting-desc">Impor data dari file JSON</span>
+                    </div>
+                    <label class="btn-secondary btn-file">
+                        Pilih File
+                        <input type="file" id="import-file" accept=".json" hidden>
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <span class="setting-label">Ekspor Data</span>
+                        <span class="setting-desc">Unduh seluruh data sebagai JSON</span>
+                    </div>
+                    <button class="btn-secondary" id="btn-export-json">Unduh JSON</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ==================== MODALS ==================== -->
+
+    <!-- Transaction Modal -->
+    <div class="modal-overlay" id="modal-transaction">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="modal-transaction-title">Tambah Transaksi</h2>
+                <button class="modal-close" id="modal-transaction-close">&times;</button>
+            </div>
+            <form id="form-transaction">
+                <div class="form-group">
+                    <label for="tx-type">Tipe</label>
+                    <div class="type-toggle">
+                        <button type="button" class="type-btn active" data-type="expense" id="type-expense">Pengeluaran</button>
+                        <button type="button" class="type-btn" data-type="income" id="type-income">Pemasukan</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="tx-amount">Jumlah</label>
+                    <input type="number" id="tx-amount" placeholder="0" required min="1">
+                </div>
+                <div class="form-group">
+                    <label for="tx-category">Kategori</label>
+                    <select id="tx-category" required>
+                        <option value="">Pilih kategori</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="tx-description">Deskripsi</label>
+                    <input type="text" id="tx-description" placeholder="Deskripsi transaksi" required>
+                </div>
+                <div class="form-group">
+                    <label for="tx-date">Tanggal</label>
+                    <input type="date" id="tx-date" required>
+                </div>
+                <input type="hidden" id="tx-id">
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" id="btn-cancel-transaction">Batal</button>
+                    <button type="submit" class="btn-primary" id="btn-save-transaction">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Category Modal -->
+    <div class="modal-overlay" id="modal-category">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="modal-category-title">Tambah Kategori</h2>
+                <button class="modal-close" id="modal-category-close">&times;</button>
+            </div>
+            <form id="form-category">
+                <div class="form-group">
+                    <label for="cat-type">Tipe</label>
+                    <div class="type-toggle">
+                        <button type="button" class="type-btn active" data-type="expense" id="cat-type-expense">Pengeluaran</button>
+                        <button type="button" class="type-btn" data-type="income" id="cat-type-income">Pemasukan</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="cat-name">Nama Kategori</label>
+                    <input type="text" id="cat-name" placeholder="Contoh: Transportasi" required>
+                </div>
+                <div class="form-group">
+                    <label for="cat-icon">Ikon</label>
+                    <div class="icon-picker" id="icon-picker">
+                        <!-- filled by JS -->
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="cat-color">Warna</label>
+                    <div class="color-picker" id="color-picker">
+                        <!-- filled by JS -->
+                    </div>
+                </div>
+                <input type="hidden" id="cat-id">
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" id="btn-cancel-category">Batal</button>
+                    <button type="submit" class="btn-primary" id="btn-save-category">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Confirm Modal -->
+    <div class="modal-overlay" id="modal-confirm">
+        <div class="modal modal-sm">
+            <div class="modal-header">
+                <h2>Konfirmasi</h2>
+                <button class="modal-close" id="modal-confirm-close">&times;</button>
+            </div>
+            <p id="confirm-message">Apakah kamu yakin?</p>
+            <div class="form-actions">
+                <button class="btn-secondary" id="btn-confirm-cancel">Batal</button>
+                <button class="btn-danger" id="btn-confirm-ok">Hapus</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAB (mobile) -->
+    <button class="fab" id="fab-add">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+    </button>
+
+    <!-- Toast -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

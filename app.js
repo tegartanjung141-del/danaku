@@ -133,7 +133,14 @@
         });
 
         // FAB
-        $('#fab-add').addEventListener('click', () => openTransactionModal());
+        $('#fab-add').addEventListener('click', () => {
+            const activePage = $('.page.active');
+            if (activePage && activePage.id === 'page-categories') {
+                openCategoryModal();
+            } else {
+                openTransactionModal();
+            }
+        });
     }
 
     function navigateTo(page) {

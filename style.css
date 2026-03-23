@@ -1470,3 +1470,40 @@ select:focus,
         border-top: 1px dashed var(--border);
     }
 }
+
+@media (max-width: 380px) {
+    .transaction-item {
+        grid-template-columns: 40px 1fr;
+        grid-template-areas: 
+            "icon details"
+            ".... amount"
+            ".... actions";
+        gap: 6px 10px;
+        padding: 14px 0;
+    }
+
+    .tx-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .tx-amount {
+        text-align: left;
+        font-size: 1rem;
+        margin-top: 2px;
+    }
+
+    .category-card {
+        grid-template-columns: 40px 1fr;
+        grid-template-areas: 
+            "icon info"
+            ".... actions";
+        gap: 10px;
+        padding: 14px;
+    }
+
+    .cat-icon-wrapper {
+        width: 40px;
+        height: 40px;
+    }
+}

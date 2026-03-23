@@ -1097,11 +1097,25 @@ select:focus, .month-filter:focus {
 
     .page-header h1 { font-size: 1.4rem; }
 
+    #btn-add-transaction, 
+    #btn-add-category {
+        display: none;
+    }
+
     .tx-actions { opacity: 1; }
     .cat-actions { opacity: 1; }
 
     .filters { flex-direction: column; }
     .search-box { min-width: auto; }
+
+    .modal {
+        width: 95%;
+        padding: 20px;
+    }
+    
+    .modal-header {
+        margin-bottom: 20px;
+    }
 }
 
 @media (max-width: 480px) {
